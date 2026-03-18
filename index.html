@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OS Aadarsh Vidhyalaya Shirwal Library</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-book-open"></i>
+            <span>OS Aadarsh Vidhyalaya Library</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#collection">Collection</a></li>
+            <li><a href="#contribute">Add Book</a></li> <!-- New Link -->
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero-section">
+        <div class="hero-content">
+            <h1>Welcome to the Library</h1>
+            <p>OS Aadarsh Vidhyalaya, Shirwal</p>
+            <p class="tagline">"Empowering Minds, Enriching Futures"</p>
+            <a href="#contribute" class="btn-explore">Contribute a Book</a>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="container about-section">
+        <h2>About Our Library</h2>
+        <div class="about-content">
+            <p>
+                The <strong>OS Aadarsh Vidhyalaya Shirwal Library</strong> serves as the intellectual heart of the school. We are dedicated to supporting the educational curriculum and fostering a love for reading among students. 
+            </p>
+        </div>
+    </section>
+
+    <!-- Existing Collection Section -->
+    <section id="collection" class="collection-section">
+        <h2>Existing Collection</h2>
+        <div class="card-container">
+            <div class="card">
+                <i class="fas fa-book"></i>
+                <h3>Textbooks</h3>
+                <p>Curriculum-based books for all standards.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-feather-alt"></i>
+                <h3>Literature</h3>
+                <p>Novels and stories in Marathi, Hindi, and English.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-newspaper"></i>
+                <h3>Periodicals</h3>
+                <p>Newspapers and magazines.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Contribute Book Section -->
+    <section id="contribute" class="contribute-section">
+        <h2><i class="fas fa-plus-circle"></i> Add a New Book</h2>
+        <p style="margin-bottom: 20px; text-align: center;">Know a good book? Add it to our community list below!</p>
+        
+        <form id="bookForm" class="book-form">
+            <input type="text" id="bookTitle" placeholder="Book Title (e.g., The Alchemist)" required>
+            <input type="text" id="bookAuthor" placeholder="Author Name (e.g., Paulo Coelho)" required>
+            <select id="bookCategory">
+                <option value="Fiction">Fiction</option>
+                <option value="Science">Science</option>
+                <option value="History">History</option>
+                <option value="Other">Other</option>
+            </select>
+            <button type="submit" class="btn-submit">Add to List</button>
+        </form>
+    </section>
+
+    <!-- NEW: User Added Books List -->
+    <section id="book-list" class="container book-list-section">
+        <h2>Community Book Contributions</h2>
+        <div id="booksDisplay" class="user-books-container">
+            <!-- JavaScript will add books here -->
+            <div class="empty-message">No books added yet. Be the first to contribute!</div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <h2>Contact Us</h2>
+        <div class="contact-info">
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>OS Aadarsh Vidhyalaya, Shirwal, Maharashtra</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-clock"></i>
+                <span>Mon - Sat: 8:00 AM - 4:00 PM</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 OS Aadarsh Vidhyalaya Shirwal Library.</p>
+    </footer>
+
+    <!-- Updated JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Logic to Add Books
+        const bookForm = document.getElementById('bookForm');
+        const booksDisplay = document.getElementById('booksDisplay');
+        const emptyMessage = document.querySelector('.empty-message');
+
+        bookForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent page reload
+
+            // Get values
+            const title = document.getElementById('bookTitle').value;
+            const author = document.getElementById('bookAuthor').value;
+            const category = document.getElementById('bookCategory').value;
+
+            // Remove 'no books' message if it exists
+            if(emptyMessage) {
+                emptyMessage.style.display = 'none';
+            }
+
+            // Create new book card
+            const bookCard = document.createElement('div');
+            bookCard.className = 'user-book-card';
+            bookCard.innerHTML = `
+                <div class="book-icon"><i class="fas fa-book"></i></div>
+                <div class="book-details">
+                    <h3>${title}</h3>
+                    <p><strong>Author:</strong> ${author}</p>
+                    <span class="category-tag">${category}</span>
+                </div>
+            `;
+
+            // Add to display area
+            booksDisplay.appendChild(bookCard);
+
+            // Clear form
+            bookForm.reset();
+        });
+    </script>
+
+</body>
+</html>
